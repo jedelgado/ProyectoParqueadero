@@ -139,7 +139,7 @@ public class parqueaderosPopServer implements Runnable{
         procesarAccion(accion, parametros);
     }
     
-    //Ejecuta la accion dependiendo de lo que le llegue
+    //Ejecuta la accion dependiendo de lo que pida el cliente
     private void procesarAccion(String accion, String parametros[]) throws ClassNotFoundException,SQLException {
         String resultado;
         switch (accion) {
@@ -153,6 +153,25 @@ public class parqueaderosPopServer implements Runnable{
                 }
                 salida.println(resultado);
                 break;
+            case "ingresarParqueadero":
+                try {
+                    gestorPa.agregarParqueadero(parametros[1], parametros[2], parametros[3], parametros[4], parametros[5], parametros[6], parametros[7]);
+                    resultado = "BIEN";
+                } catch (Exception e) {
+                    System.out.println(e);
+                    resultado = "FALLO";
+                }
+                
+            case "actualizarIngreso":
+                try {
+                    gestorPa.actualizarIngreso(parametros[1]);
+                    resultado = "BIEN";
+            } catch (Exception e) {
+                    System.out.println(e);
+                    resultado = "FALLO";
+            }
+                
+                
             case "consultarRegVehiculoFicha":
 
                 RegVehiculo reg = gestorReg.consultarRegVehiculoFicha(parametros[1]);
@@ -162,6 +181,7 @@ public class parqueaderosPopServer implements Runnable{
                     salida.println(parseToJSONRegVehiculo(reg));
                 }
                 break;
+                
             case "consultarRegVehiculoPlaca":
 
                 RegVehiculo regVehi = gestorReg.consultarRegVehiculoPlaca(parametros[1]);
@@ -180,6 +200,16 @@ public class parqueaderosPopServer implements Runnable{
                     salida.println(parseToJSONVehiculo(vehi));
                 }
                 break;
+                
+            case "actualizarSalida":
+                try {
+                    gestorPa.actualizarSalida(parametros[1]);
+                    resultado = "BIEN";
+            } catch (Exception e) {
+                    System.out.println(e);
+                    resultado = "FALLO";
+            }    
+                
             case "actualizarRegVehiculo":
                 try {
                     gestorReg.actualizarRegVehiculo(parametros[1], parametros[2]);
@@ -189,6 +219,7 @@ public class parqueaderosPopServer implements Runnable{
                     resultado = "FALLO";
                 }
                 break;
+                
             case "consultarTarifa":
                 Tarifa tarifa = gestorTa.consultarTarifa(parametros[1],parametros[2]);
                 if (tarifa == null) {
@@ -197,6 +228,7 @@ public class parqueaderosPopServer implements Runnable{
                     salida.println(parseToJSONTarifa(tarifa));
                 }
                 break;
+                
             case "consultarParqueadero":
                 Parqueadero parque = gestorPa.consultarParqueadero(parametros[1]);
                 if (parque == null) {
@@ -205,6 +237,7 @@ public class parqueaderosPopServer implements Runnable{
                     salida.println(parseToJSONParqueadero(parque));
                 }
                 break;
+                
             case "consultarTarifaMotos":
                 Tarifa tari = gestorTa.consultarTarifaMotos(parametros[1], parametros[2]);
                 if (tari == null) {
@@ -213,6 +246,7 @@ public class parqueaderosPopServer implements Runnable{
                     salida.println(parseToJSONTarifa(tari));
                 }
                 break;
+                
             case "consultarPersona":
                 Persona per = gestorPer.consultarPersona(parametros[1], parametros[2]);
                 if (per == null) {
@@ -222,7 +256,6 @@ public class parqueaderosPopServer implements Runnable{
                 }
                 
                 break;
-
         }
     }
     
@@ -241,8 +274,7 @@ public class parqueaderosPopServer implements Runnable{
         Properties prop = gson.fromJson(Json, Properties.class);
         
         vehi.setPlacaVehiculo(prop.getProperty("placaVehiculo"));
-        vehi.setTipoVehiculo(prop.getProperty("tipoVehiculo"));
-        
+        vehi.setTipoVehiculo(prop.getProperty("tipoVehiculo"));   
     }
     
     //Convierte el objeto Json a RegVehiculo
@@ -264,6 +296,21 @@ public class parqueaderosPopServer implements Runnable{
         reg.setRegUsuario(prop.getProperty("regUsuario"));
         reg.setRegHoraYFechaSalida(prop.getProperty("regHoraYFechaSalida"));
     }
+    
+    private void parseToRegParqueadero(String Json){
+        
+        Parqueadero p = new Parqueadero();
+        Gson gson = new Gson();
+        Properties prop = gson.fromJson(Json, Properties.class);
+        
+        p.setNitParqueadero(prop.getProperty("nitParqueadero"));
+        p.setNomParqueadero(prop.getProperty("nomParqueadero"));
+        p.setDirecParqueadero(prop.getProperty("dirParqueadero"));
+        p.setTelParqueadero(prop.getProperty("telParqueadero"));
+        p.setUsuarioPar(prop.getProperty("usuarioPar"));
+        p.setLibres(prop.getProperty("puestosLibres"));
+        p.setOcupados(prop.getProperty("puestosOcupados"));    
+    } 
     
     //Convierte el objeto Vehiculo a Json
     private String parseToJSONVehiculo(Vehiculo vehi){
@@ -297,7 +344,8 @@ public class parqueaderosPopServer implements Runnable{
         jsonObj.addProperty("direcParqueadero", par.getDirecParqueadero());
         jsonObj.addProperty("telParqueadero", par.getTelParqueadero());
         jsonObj.addProperty("usuarioPar", par.getUsuarioPar());
-        
+        jsonObj.addProperty("puestosLibres", par.getLibres());
+        jsonObj.addProperty("puestosOcupados", par.getOcupados());
         return jsonObj.toString();
     }
     

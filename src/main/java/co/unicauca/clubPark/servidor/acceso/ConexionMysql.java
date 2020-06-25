@@ -63,8 +63,7 @@ public class ConexionMysql {
         }catch(SQLException e){
             System.out.println(e);
             return false;
-        }
-        
+        }  
     }
     
     public boolean actualizar(String sql){

@@ -10,14 +10,18 @@ public class Parqueadero {
     private String direcParqueadero;
     private String telParqueadero;
     private String usuarioPar;
+    private String libres;
+    private String ocupados;
     
     //Constructor parametrizado de la clase parqueadero
-    public Parqueadero(String nitParqueadero, String nomParqueadero, String direcParqueadero, String telParqueadero, String usuarioAdmin) {
+    public Parqueadero(String nitParqueadero, String nomParqueadero, String direcParqueadero, String telParqueadero, String usuarioAdmin, String libres, String ocupados) {
         this.nitParqueadero = nitParqueadero;
         this.nomParqueadero = nomParqueadero;
         this.direcParqueadero = direcParqueadero;
         this.telParqueadero = telParqueadero;
         this.usuarioPar = usuarioAdmin;
+        this.libres = libres;
+        this.ocupados = ocupados;
     }
     //Constructor sin parametros de la clase parqueadero
     public Parqueadero(){
@@ -26,6 +30,8 @@ public class Parqueadero {
         direcParqueadero= "";
         telParqueadero= "";
         usuarioPar= "";
+        libres = "";
+        ocupados = "";
     }
     
     /**
@@ -69,6 +75,22 @@ public class Parqueadero {
 
     public void setUsuarioPar(String usuarioPar) {
         this.usuarioPar = usuarioPar;
+    }
+
+    public String getLibres() {
+        return libres;
+    }
+
+    public void setLibres(String libres) {
+        this.libres = libres;
+    }
+
+    public String getOcupados() {
+        return ocupados;
+    }
+
+    public void setOcupados(String ocupados) {
+        this.ocupados = ocupados;
     }
     
     

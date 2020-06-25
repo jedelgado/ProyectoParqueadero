@@ -65,6 +65,7 @@ public class GestorRegVehiculo {
         return reg;
     }
     
+    
     //Metodo que se utiliza para actualizar los datos del ingreso( estado, fechaSalida)del vehiculo en la base de datos
     public void actualizarRegVehiculo (String Placa,String HoraFechaSalida)throws ClassNotFoundException,SQLException{
     cn.conectar();
