@@ -10,7 +10,14 @@ import java.sql.SQLException;
 public class GestorPersona {
     ConexionMysql cn = new ConexionMysql();
     
-    //Metodo para consultar la existencia de un usuario con el usuario y contraseña que ingresan desde el cliente 
+    /**
+     * Metodo para consultar la existencia de una persona con el usuario y contraseña que ingresa el cliente en el login 
+     * @param Usuario
+     * @param Contraseña
+     * @return
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     public Persona consultarPersona(String Usuario,String Contraseña)throws ClassNotFoundException,SQLException{
         Persona per = null;
         cn.conectar();

@@ -139,7 +139,7 @@ public class parqueaderosPopServer implements Runnable{
         procesarAccion(accion, parametros);
     }
     
-    //Ejecuta la accion dependiendo de lo que pida el cliente
+    //Ejecuta la acción dependiendo de lo que pida el cliente
     private void procesarAccion(String accion, String parametros[]) throws ClassNotFoundException,SQLException {
         String resultado;
         switch (accion) {
@@ -155,22 +155,20 @@ public class parqueaderosPopServer implements Runnable{
                 break;
             case "ingresarParqueadero":
                 try {
-                    gestorPa.agregarParqueadero(parametros[1], parametros[2], parametros[3], parametros[4], parametros[5], parametros[6], parametros[7]);
+                    gestorPa.agregarParqueadero(parametros[1], parametros[2], parametros[3], parametros[4], parametros[5], Integer.parseInt(parametros[6]), Integer.parseInt(parametros[7]));
                     resultado = "BIEN";
                 } catch (Exception e) {
                     System.out.println(e);
                     resultado = "FALLO";
                 }
-                
-            case "actualizarIngreso":
+            case "consularPuestos":
                 try {
-                    gestorPa.actualizarIngreso(parametros[1]);
-                    resultado = "BIEN";
+                gestorPa.consultarPuestos(parametros[1]);
+                resultado = "BIEN";
             } catch (Exception e) {
                     System.out.println(e);
                     resultado = "FALLO";
             }
-                
                 
             case "consultarRegVehiculoFicha":
 
@@ -191,6 +189,16 @@ public class parqueaderosPopServer implements Runnable{
                     salida.println(parseToJSONRegVehiculo(regVehi));
                 }
                 break;
+                
+             case "actualizarIngreso":
+                try {
+                    gestorPa.actualizarIngreso(parametros[1]);
+                    resultado = "BIEN";
+            } catch (Exception e) {
+                    System.out.println(e);
+                    resultado = "FALLO";
+            }
+                
             case "consultarVehiculo":
 
                 Vehiculo vehi = gestorVehi.consultarVehiculo(parametros[1]);

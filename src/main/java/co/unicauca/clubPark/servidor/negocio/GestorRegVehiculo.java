@@ -11,7 +11,22 @@ public class GestorRegVehiculo {
     
     ConexionMysql cn = new ConexionMysql();
     
-    //Metodo para insertar un nuevo registro de vehiculo al parqueadero en la base de datos
+    /**
+     * Metodo encargado de insertar un nuevo registro de vehiculo a un parqueadero determinado en la base de datos
+     * @param numFicha
+     * @param Placa
+     * @param TipoVehiculo
+     * @param HoraFechaEntrada
+     * @param EstadoVehiculo
+     * @param Llaves
+     * @param NumCascos
+     * @param NitParqueadero
+     * @param NumCasillero
+     * @param Usuario
+     * @param HoraFechaSalida
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     public void ingresarVehiculo(String numFicha,String Placa, String TipoVehiculo,String HoraFechaEntrada,String EstadoVehiculo,String Llaves,String NumCascos,String NitParqueadero,String NumCasillero ,String Usuario, String HoraFechaSalida ) throws ClassNotFoundException, SQLException{
         GestorVehiculo gestorVehi = new GestorVehiculo();
         cn.conectar();
@@ -37,8 +52,14 @@ public class GestorRegVehiculo {
         }
         cn.desconectar();
     }
-    
-    //Metodo para consultar los datos y sobretodo el estado de un vehiculo por el numero de ficha que se este ingresando desde el cliente
+     
+    /**
+     * Metodo para consultar los datos y sobretodo el estado de un vehiculo por el numero de ficha que se este ingresando desde el cliente
+     * @param numFicha
+     * @return
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     public RegVehiculo consultarRegVehiculoFicha(String numFicha) throws ClassNotFoundException,SQLException {
         RegVehiculo reg = new RegVehiculo();
         cn.conectar();
@@ -66,7 +87,13 @@ public class GestorRegVehiculo {
     }
     
     
-    //Metodo que se utiliza para actualizar los datos del ingreso( estado, fechaSalida)del vehiculo en la base de datos
+    /**
+     * Metodo que se utiliza para actualizar los datos del ingreso( estado, fechaSalida)del vehiculo en la base de datos
+     * @param Placa
+     * @param HoraFechaSalida
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     public void actualizarRegVehiculo (String Placa,String HoraFechaSalida)throws ClassNotFoundException,SQLException{
     cn.conectar();
     String sql="UPDATE registrarvehiculo SET regEstadoVehiculo='Retirado',regHoraYFechaSalida='"+HoraFechaSalida+"' WHERE regPlacaVehiculo= '"+Placa+"'";
@@ -75,7 +102,13 @@ public class GestorRegVehiculo {
     cn.desconectar();
     }
     
-    //Metodo para consultar los datos de un vehiculo, buscando por la placa que se este ingresando desde el cliente
+    /**
+     * Metodo para consultar los datos de un vehiculo, buscando por la placa que se este ingresando desde el cliente
+     * @param Placa
+     * @return
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     public RegVehiculo consultarRegVehiculoPlaca(String Placa) throws ClassNotFoundException,SQLException {
         RegVehiculo reg = new RegVehiculo();
         cn.conectar();

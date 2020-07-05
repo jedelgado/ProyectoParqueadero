@@ -10,8 +10,14 @@ import java.sql.SQLException;
 public class GestorVehiculo {
    
     ConexionMysql cn = new ConexionMysql();
-    
-    //Metodo para insertar un nuevo vehiculo en la base de datos
+   
+    /**
+     * Metodo para insertar un nuevo vehiculo en la base de datos
+     * @param placa
+     * @param TipoVehiculo
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     public void registarVehiculo(String placa,String TipoVehiculo)throws ClassNotFoundException,SQLException{
         cn.conectar();
         cn.actualizar("INSERT INTO vehiculo (placaVehiculo,tipoVehiculo) VALUES("
@@ -20,8 +26,14 @@ public class GestorVehiculo {
                 + ")");
         cn.desconectar();
     }
-    
-    //Metodo para consultar si existe un vehiculo en la base de datos
+      
+    /**
+     * Metodo para consultar si existe un vehiculo en la base de datos
+     * @param placa
+     * @return
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     public Vehiculo consultarVehiculo(String placa)throws ClassNotFoundException,SQLException{
         Vehiculo vehi = null;
         cn.conectar();

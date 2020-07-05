@@ -10,8 +10,15 @@ import java.sql.SQLException;
 public class GestorTarifa {
     ConexionMysql cn = new ConexionMysql();
     
-    //Metodo para consultar las tarifas que se tienen para carros y motos
-    //Ademas un metodo calcula el valor total del tiempo que un cliente tuvo su vehiculo en el parqueadero.
+    /**
+     * Metodo para consultar las tarifas que se tienen para carros y motos
+     * Ademas un metodo calcula el valor total del tiempo que un cliente tuvo su vehiculo en el parqueadero.
+     * @param Horas
+     * @param Minutos
+     * @return
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     public Tarifa consultarTarifa(String Horas,String Minutos)throws ClassNotFoundException,SQLException{
         Tarifa tarifa = new Tarifa();
 

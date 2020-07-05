@@ -1,5 +1,4 @@
 package co.unicauca.clubPark.servidor.negocio;
-
 /**
  *
  * @author javier

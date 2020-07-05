@@ -14,33 +14,16 @@ import javax.swing.JOptionPane;
 public class ConexionMysql {
     
     private Connection conexion = null;
-    
-    private final String usuario="root";
-    private final String contraseña="";
-    private final String url="jdbc:mysql://localhost:3306/parqueaderopopayan";
     private ResultSet rs;
     private Statement st = null;
     
-    public ConexionMysql(){
-        
+    public ConexionMysql(){    
     }
-    /**
-     *Accede a la conexion con Mysql o la base de datos
-     * 
-    *///desde aquí
-//    public void conectar() throws ClassNotFoundException,SQLException{
-//        
-//        try{
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-//            //Class.forName("com.mysql.jdbc.Driver");
-//            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/parqueaderopopayan","root","");
-//            st = conexion.createStatement();
-//            JOptionPane.showMessageDialog(null, "Conectado a la BD");
-//        }catch(Exception e){
-//            JOptionPane.showMessageDialog(null, "No se pudo conectar");
-//        }    
-//    }
     
+    /**
+     * 
+     * Accede a la conexión con MySql o la base de datos
+     */
     public Connection conectar(){
         
         try{
@@ -52,9 +35,12 @@ public class ConexionMysql {
         }
         return conexion;
     }
-    
-    
 
+    /**
+     * Metodo que crea una consulta sql
+     * @param sql
+     * @return 
+     */
      public boolean crearConsulta(String sql) {
         try{
             st = conexion.createStatement();
@@ -66,6 +52,11 @@ public class ConexionMysql {
         }  
     }
     
+     /**
+      * metodo paracatualizar una o varias columnas de una tabla en la base de datos
+      * @param sql
+      * @return 
+      */
     public boolean actualizar(String sql){
         try{
             st = conexion.createStatement();
